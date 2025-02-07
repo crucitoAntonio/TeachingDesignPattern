@@ -1,4 +1,23 @@
-package BuilderPattern
+package builderPattern
+/**
+ * 🚧 **Patrón Builder:**
+ *
+ * Es un patrón de diseño creacional que permite construir objetos complejos
+ * paso a paso, proporcionando flexibilidad y claridad en su creación.
+ *
+ * 📌 **Características:**
+ * - Permite construir diferentes representaciones del mismo objeto
+ *   utilizando el mismo proceso de construcción.
+ * - Separa la lógica de creación del objeto de su representación final.
+ *
+ * ✅ **¿Cuándo utilizarlo?**
+ * - Cuando se necesite construir un objeto compuesto por múltiples partes.
+ * - Cuando se desee que el proceso de construcción sea independiente
+ *   de los componentes que forman el objeto.
+ *
+ * 💡 **Beneficio clave:** Simplifica la creación de objetos complejos sin
+ * ensuciar el código con múltiples constructores o configuraciones desordenadas.
+ */
 
 fun main() {
     val oldComputer = BuilderComputer().apply {
