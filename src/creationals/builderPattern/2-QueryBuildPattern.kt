@@ -1,4 +1,4 @@
-package builderPattern
+package creationals.builderPattern
 // Query Builder
 /**
  * Debe de tener los siguientes métodos:
