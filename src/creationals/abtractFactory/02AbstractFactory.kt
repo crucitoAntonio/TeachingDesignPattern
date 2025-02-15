@@ -1,84 +1,79 @@
 package creationals.abtractFactory
 
 /**
- * 🎭 **Patrón Abstract Factory** 🎭
- *
- * El patrón de diseño **Abstract Factory** permite crear **familias de objetos relacionados**
- * sin especificar sus clases concretas. 🏭 En lugar de instanciar objetos individuales directamente,
- * se define una **fábrica abstracta** que produce un conjunto de objetos relacionados.
- *
- * ✅ **Beneficios:**
- *   - 🔄 Facilita la creación de objetos que deben ser utilizados en conjunto.
- *   - 📦 Promueve la **cohesión** y el principio de **Inversión de Dependencias**.
- *   - 🚀 Mejora la **escalabilidad** y la **flexibilidad** del código.
- *
- * 🍔 **Caso de uso en este proyecto:**
- *   - Se aplica este patrón para modelar la creación de **hamburguesas y bebidas** 🥤,
- *     asegurando que cada combinación de productos pertenezca a una misma familia.
- *
- * 📌 Más información: [Refactoring Guru - Abstract Factory](https://refactoring.guru/es/design-patterns/abstract-factory)
+ * !Instrucciones:
+1.Completen las Clases de Productos:
+•	ElectricCar debe implementar Vehicle y mostrar el mensaje "Ensamblando un auto eléctrico".
+•	GasCar debe implementar Vehicle y mostrar el mensaje "Ensamblando un auto de combustión".
+•	ElectricEngine debe implementar Engine y mostrar el mensaje "Arrancando motor eléctrico".
+•	GasEngine debe implementar Engine y mostrar el mensaje "Arrancando motor de combustión".
+
+2.	Completen las Clases de Fábricas:
+•	ElectricVehicleFactory debe crear un ElectricCar y un ElectricEngine.
+•	GasVehicleFactory debe crear un GasCar y un GasEngine.
+
+3. Prueben el Código:
+•	Ejecuten el código para asegurarse de que cada fábrica produce el tipo correcto de vehículo y motor.
+
  */
-
-interface Hamburger{
-    fun prepare()
+interface Vehicle{
+    fun Ensambling()
 }
-interface Drink{
-    fun pour()
+interface Engine{
+    fun Starting()
 }
-
-class ChickenHamburger():Hamburger{
-    override fun prepare() {
-        println("Preparing Chiken hamburguer")
+class ElectricCarEnsambling():Vehicle{
+    override fun Ensambling() {
+        println("Ensamblando un auto eléctrico")
     }
 }
+class CombustionCarEnsambling():Vehicle{
+    override fun Ensambling() {
+        println("Ensamblando un auto de combustión")
+    }
+}
+class ElectricalCaStartingr():Engine{
+    override fun Starting() {
+        println("Starting motor eléctrico")
+    }
+}
+class CombustionCaStartingr():Engine{
+    override fun Starting() {
+        println("Starting motor de combustión")
+    }
+}
+interface CreatingCarFactory{
+    fun CreateCar():Vehicle
+    fun CreateEngine():Engine
+}
+class ElectricVehicleFactory:CreatingCarFactory{
+    override fun CreateCar(): Vehicle {
+        return ElectricCarEnsambling()
+    }
+    override fun CreateEngine(): Engine {
+        return ElectricalCaStartingr()
+    }
+}
+class CombustionVehicleFactory:CreatingCarFactory{
+    override fun CreateCar(): Vehicle {
+        return CombustionCarEnsambling()
+    }
+    override fun CreateEngine(): Engine {
+        return CombustionCaStartingr()
+    }
+}
+fun initialization(carFactory:CreatingCarFactory){
+    var carType=carFactory.CreateCar()
+    var engineType=carFactory.CreateEngine()
+    carType.Ensambling()
+    engineType.Starting()
 
-class BeefHamburger():Hamburger{
-    override fun prepare() {
-        println("Preparing Beef hamburguer")
-    }
 }
 
-class Water():Drink{
-    override fun pour() {
-        println("Pouring a Water glass")
-    }
-}
-
-class Soda():Drink{
-    override fun pour() {
-        println("Pouring a coca cola")
-    }
-}
-interface RestaurantFactory{
-    fun createHamburger():Hamburger
-    fun createDrink():Drink
-}
-class FastFoodRestaurantFactory():RestaurantFactory{
-    override fun createHamburger(): Hamburger {
-        return BeefHamburger()
-    }
-
-    override fun createDrink(): Drink {
-        return Soda()
-    }
-}
-class HealtFoodRestaurantFactory():RestaurantFactory{
-    override fun createHamburger(): Hamburger {
-        return ChickenHamburger()
-    }
-
-    override fun createDrink(): Drink {
-        return Water()
-    }
-}
-
-fun mainMenu(factory: RestaurantFactory) {
-    var hamburger = factory.createHamburger()
-    var drink = factory.createDrink()
-    hamburger.prepare()
-    drink.pour()
-}
 fun main(){
-    mainMenu(HealtFoodRestaurantFactory())
-    mainMenu(FastFoodRestaurantFactory())
+    println("Electrical Car Chose")
+    initialization(ElectricVehicleFactory())
+    println("\n\n")
+    println("Combustion Car Chose")
+    initialization(CombustionVehicleFactory())
 }
