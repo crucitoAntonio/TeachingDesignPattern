@@ -1,7 +1,6 @@
 package creationals.factoryFunctionMethod
 
 import java.util.Calendar
-import java.util.Date
 
 /**
  * 🚀 **Factory Function**
@@ -36,7 +35,7 @@ data class DATA_ENUM(
         )
 
 fun getDetailAlert(data: String):(String)->Unit{
-    var message:String =
+    val message:String =
         when(data){
             DATA_ENUM().INFO -> {"[${DATA_ENUM().INFO}: ${getDate()}]"}
             DATA_ENUM().WARNING -> {"[${DATA_ENUM().WARNING}: ${getDate()}]"}
@@ -51,9 +50,9 @@ fun getDate():String{
     return "${Calendar.getInstance().get(Calendar.YEAR)}-${Calendar.getInstance().get(Calendar.MONTH)+1}-${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}"
 }
 fun main(){
-    var error = getDetailAlert(DATA_ENUM().ERROR)
-    var info = getDetailAlert(DATA_ENUM().INFO)
-    var warning = getDetailAlert(DATA_ENUM().WARNING)
+    val error = getDetailAlert(DATA_ENUM().ERROR)
+    val info = getDetailAlert(DATA_ENUM().INFO)
+    val warning = getDetailAlert(DATA_ENUM().WARNING)
     (info("Aplicación iniciada correctamente"))
     (warning("El uso de memoria está alto."))
     (error("Error de conexión a la base de datos."))

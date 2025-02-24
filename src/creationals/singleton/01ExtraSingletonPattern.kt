@@ -34,7 +34,7 @@ package creationals.singleton
  */
 
 fun main() {
-    var config = ConfigManager()
+    val config = ConfigManager()
     config.setConfig("apiURL","http://localhost:3000/api")
     config.setConfig("timeout","5000")
     config.setConfig("apikey","ABC123")
